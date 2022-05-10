@@ -17,7 +17,7 @@ export default function Layout({ children }) {
 				/>
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
-			<main className="bg-white dark:bg-darkBlue text-darkBlue dark:text-white font min-h-screen transition-all duration-500">
+			<main className="bg-white dark:bg-darkBlue text-darkBlue dark:text-white font min-h-screen">
 				<Navbar />
 				{children}
 			</main>
