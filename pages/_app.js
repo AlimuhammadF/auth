@@ -1,7 +1,15 @@
-import '../styles/globals.css'
+import Layout from "../components/Layout";
+import { UiContextProvider } from "../context/UiContext";
+import "../styles/globals.css";
 
 function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />
+	return (
+		<UiContextProvider>
+			<Layout>
+				<Component {...pageProps} />
+			</Layout>
+		</UiContextProvider>
+	);
 }
 
-export default MyApp
+export default MyApp;
