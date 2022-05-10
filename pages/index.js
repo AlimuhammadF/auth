@@ -1,7 +1,7 @@
 import Head from "next/head";
 import Image from "next/image";
 import heroImage from "../public/images/hero.svg";
-import  Router  from "next/router";
+import Router from "next/router";
 
 export default function Home() {
 	return (
@@ -20,7 +20,7 @@ export default function Home() {
 				<article className="col-span-1 flex flex-col justify-center lg:items-start ml-8 mr-8 lg:mr-0 items-center z-10">
 					<h1 className="font-semibold text-5xl xl:text-6xl text-center lg:text-left leading-tight">
 						Full stack auth website for portfolio purposes
-						<span>.</span>
+						<span className="text-accent">.</span>
 					</h1>
 					<p className="text-center lg:text-lg lg:text-left font-normal mt-5 lg:mt-10 opacity-70 px-10 lg:px-0">
 						This is a full stack authentication website for
