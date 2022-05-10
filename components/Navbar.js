@@ -2,7 +2,7 @@ import Image from "next/image";
 import logoImage from "../public/images/logo.svg";
 import darkModeImage from "../public/images/darkmode.svg";
 import lightModeImage from "../public/images/lightmode.svg";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import UiContext from "../context/UiContext";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
@@ -11,6 +11,21 @@ export default function Navbar() {
 	//handle menu
 	const [menu, setMenu] = useState(false);
 	const [renderDropDown, setRenderDropDown] = useState(false);
+
+	const handleMenuClick = () => {
+		if (menu) {
+			setMenu(false);
+		} else {
+			setMenu(true);
+		}
+	};
+	useEffect(() => {
+		if (menu) {
+			document.body.style.overflow = "hidden";
+		} else if (!menu) {
+			document.body.style.overflow = "visible";
+		}
+	}, [menu]);
 
 	const menuVariants = {
 		hidden: {
@@ -86,9 +101,11 @@ export default function Navbar() {
 						</AnimatePresence>
 					</li>
 					<li>
-						<a className="font-medium opacity-60 hover:opacity-100 cursor-pointer transition-opacity duration-300">
-							Protected Route
-						</a>
+						<Link href={"/ProtectedRoute"}>
+							<a className="font-medium opacity-60 hover:opacity-100 cursor-pointer transition-opacity duration-300">
+								Protected Route
+							</a>
+						</Link>
 					</li>
 				</ul>
 
@@ -109,16 +126,20 @@ export default function Navbar() {
 
 				{/* desktop signin */}
 				<hr className="hidden lg:block bg-darkBlue opacity-20 dark:bg-white h-8 w-0.5 transition-all duration-500" />
-				<a className="hidden lg:flex font-medium hover:opacity-70 transition-opacity duration-300  justify-center items-center cursor-pointer ">
-					Signin
-				</a>
-				<a className="hidden lg:flex text-white  justify-center items-center cursor-pointer bg-accent w-24 h-11 rounded-2xl font-medium border-2 border-accent hover:bg-transparent hover:text-accent transition-all duration-300">
-					Signup
-				</a>
+				<Link href={"/Auth/Signin"}>
+					<a className="hidden lg:flex font-medium hover:opacity-70 transition-opacity duration-300  justify-center items-center cursor-pointer ">
+						Signin
+					</a>
+				</Link>
+				<Link href={"/Auth/Signup"}>
+					<a className="hidden lg:flex text-white  justify-center items-center cursor-pointer bg-accent w-24 h-11 rounded-2xl font-medium border-2 border-accent hover:bg-transparent hover:text-accent transition-all duration-300">
+						Signup
+					</a>
+				</Link>
 
 				{/* hamburger menu */}
 				<button
-					onClick={() => (menu ? setMenu(false) : setMenu(true))}
+					onClick={handleMenuClick}
 					className="lg:hidden flex space-y-2 flex-col justify-center py-4"
 				>
 					<div className="h-0.5 bg-darkBlue dark:bg-white w-9 transition-all duration-500"></div>
@@ -140,28 +161,40 @@ export default function Navbar() {
 						<ul className="w-full h-full flex flex-col space-y-8 justify-center items-center">
 							<li>
 								<Link href={"/"}>
-									<a className="text-semibold text-xl active:opacity-100 transition-opacity duration-300">
+									<a
+										onClick={handleMenuClick}
+										className="text-semibold text-xl active:opacity-100 transition-opacity duration-300"
+									>
 										Home
 									</a>
 								</Link>
 							</li>
 							<li>
-								<Link href={"/"}>
-									<a className="text-semibold text-xl active:opacity-100 transition-opacity duration-300">
+								<Link href={"/Renders/ServerSideRender"}>
+									<a
+										onClick={handleMenuClick}
+										className="text-semibold text-xl active:opacity-100 transition-opacity duration-300"
+									>
 										Server Side Render
 									</a>
 								</Link>
 							</li>
 							<li>
-								<Link href={"/"}>
-									<a className="text-semibold text-xl active:opacity-100 transition-opacity duration-300">
+								<Link href={"/Renders/ClientSideRender"}>
+									<a
+										onClick={handleMenuClick}
+										className="text-semibold text-xl active:opacity-100 transition-opacity duration-300"
+									>
 										Client Side Render
 									</a>
 								</Link>
 							</li>
 							<li>
-								<Link href={"/"}>
-									<a className="text-semibold text-xl active:opacity-100 transition-opacity duration-300">
+								<Link href={"/ProtectedRoute"}>
+									<a
+										onClick={handleMenuClick}
+										className="text-semibold text-xl active:opacity-100 transition-opacity duration-300"
+									>
 										Protected Route
 									</a>
 								</Link>
@@ -170,15 +203,21 @@ export default function Navbar() {
 							<hr className="w-36 opacity-20 border border-darkBlue dark:border-white transition-colors duration-500" />
 
 							<li>
-								<Link href={"/"}>
-									<a className="text-semibold text-xl  active:opacity-100 transition-opacity duration-300">
+								<Link href={"/Auth/Signin"}>
+									<a
+										onClick={handleMenuClick}
+										className="text-semibold text-xl  active:opacity-100 transition-opacity duration-300"
+									>
 										Signin
 									</a>
 								</Link>
 							</li>
 							<li>
-								<Link href={"/"}>
-									<a className="text-semibold text-white bg-accent text-lg px-10 py-3 rounded-2xl active:opacity-100 duration-300 border-2 border-accent hover:bg-transparent hover:text-accent">
+								<Link href={"/Auth/Signup"}>
+									<a
+										onClick={handleMenuClick}
+										className="text-semibold text-white bg-accent text-lg px-10 py-3 rounded-2xl active:opacity-100 duration-300 border-2 border-accent hover:bg-transparent hover:text-accent"
+									>
 										Signup
 									</a>
 								</Link>

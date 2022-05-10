@@ -1,6 +1,7 @@
 import Head from "next/head";
 import Image from "next/image";
 import heroImage from "../public/images/hero.svg";
+import  Router  from "next/router";
 
 export default function Home() {
 	return (
@@ -27,10 +28,16 @@ export default function Home() {
 						other purpose.
 					</p>
 					<div className="flex flex-col lg:flex-row mt-10 space-y-6 lg:space-x-8 lg:space-y-0 space-x-0 pb-14">
-						<button className="w-52 h-14 text-lg bg-darkBlue dark:bg-white bg-opacity-10 dark:bg-opacity-10 font-semibold rounded-2xl hover:bg-opacity-20 hover:dark:bg-opacity-20 transition-colors duration-300">
+						<button
+							onClick={() => Router.push("/Auth/Signin")}
+							className="w-52 h-14 text-lg bg-darkBlue dark:bg-white bg-opacity-10 dark:bg-opacity-10 font-semibold rounded-2xl hover:bg-opacity-20 hover:dark:bg-opacity-20 transition-colors duration-300"
+						>
 							Signin
 						</button>
-						<button className="w-52 h-14 text-lg bg-accent text-white font-semibold rounded-2xl border-2 border-accent hover:bg-transparent hover:text-accent transition-colors duration-300">
+						<button
+							onClick={() => Router.push("/Auth/Signup")}
+							className="w-52 h-14 text-lg bg-accent text-white font-semibold rounded-2xl border-2 border-accent hover:bg-transparent hover:text-accent transition-colors duration-300"
+						>
 							Signup
 						</button>
 					</div>
