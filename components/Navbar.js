@@ -1,7 +1,7 @@
 import Image from "next/image";
 import logoImage from "../public/images/logo.svg";
-import darkModeImage from "../public/images/darkmode.svg";
-import lightModeImage from "../public/images/lightmode.svg";
+import darkModeImage from "../public/images/icons/darkmode.svg";
+import lightModeImage from "../public/images/icons/lightmode.svg";
 import { useContext, useEffect, useState } from "react";
 import UiContext from "../context/UiContext";
 import { motion, AnimatePresence } from "framer-motion";
@@ -41,11 +41,13 @@ export default function Navbar() {
 	};
 
 	//dark mode
-	const { handleDarkMode, darkmode } = useContext(UiContext);
+	const { handleDarkMode, darkmode, scroll } = useContext(UiContext);
 
 	return (
 		<nav
-			className={`max-w-screen-xl mx-auto h-24 flex items-center px-8 fixed w-full left-0 right-0 top-0 bg-white dark:bg-darkBlue justify-between z-20`}
+			className={`max-w-screen-xl mx-auto h-24 flex items-center px-8 fixed w-full left-0 right-0 top-0 ${
+				scroll >= 60 ? "bg-white dark:bg-darkBlue" : "bg-transparent"
+			}  justify-between z-20`}
 		>
 			<div className="flex items-center space-x-2 z-20">
 				<Image src={logoImage} alt="Auth logo" priority />
@@ -142,8 +144,8 @@ export default function Navbar() {
 					onClick={handleMenuClick}
 					className="lg:hidden flex space-y-2 flex-col justify-center py-4"
 				>
-					<div className="h-0.5 bg-darkBlue dark:bg-white w-9 transition-all duration-500"></div>
-					<div className="h-0.5 bg-darkBlue dark:bg-white w-9 transition-all duration-500"></div>
+					<div className="h-0.5 bg-darkBlue dark:bg-white w-9"></div>
+					<div className="h-0.5 bg-darkBlue dark:bg-white w-9 "></div>
 				</button>
 			</div>
 

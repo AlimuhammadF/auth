@@ -6,6 +6,18 @@ const UiContext = createContext({
 });
 
 export function UiContextProvider({ children }) {
+	//scroll
+	const [scroll, setScroll] = useState(null);
+
+	useEffect(() => {
+		const handleScroll = () => {
+			setScroll(window.scrollY);
+		};
+
+		window.addEventListener("scroll", handleScroll);
+	}, []);
+
+	//dark mode
 	const [darkmode, setDarkMode] = useState("dark");
 	useEffect(() => {
 		if (
@@ -41,7 +53,7 @@ export function UiContextProvider({ children }) {
 		}
 	};
 
-	const context = { darkmode, handleDarkMode };
+	const context = { darkmode, handleDarkMode, scroll };
 
 	return <UiContext.Provider value={context}>{children}</UiContext.Provider>;
 }
