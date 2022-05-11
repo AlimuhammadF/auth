@@ -73,7 +73,7 @@ export default function Signup() {
 			}
 			setSignupLoading(false);
 		} catch (error) {
-			toast.error("Signup Failed", { id: loadingSignupToast });
+			toast.error("Something went wrong", { id: loadingSignupToast });
 			setSignupLoading(false);
 		}
 	};
