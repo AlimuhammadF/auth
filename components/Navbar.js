@@ -139,7 +139,7 @@ export default function Navbar() {
 						className="w-10 h-10 bg-accent rounded-full overflow-hidden"
 					>
 						{session?.user?.image && (
-							<img src={session?.user?.image} alt="user images" />
+							<img src={session?.user?.image} alt="user-image" />
 						)}
 					</button>
 				) : (
