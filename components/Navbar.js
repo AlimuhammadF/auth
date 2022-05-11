@@ -6,8 +6,13 @@ import { useContext, useEffect, useState } from "react";
 import UiContext from "../context/UiContext";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
+import { useSession, signOut } from "next-auth/react";
 
 export default function Navbar() {
+	//session
+	const { data: session } = useSession();
+	console.log(session);
+
 	//handle menu
 	const [menu, setMenu] = useState(false);
 	const [renderDropDown, setRenderDropDown] = useState(false);
@@ -128,17 +133,29 @@ export default function Navbar() {
 
 				{/* desktop signin */}
 				<hr className="hidden lg:block bg-darkBlue opacity-20 dark:bg-white h-8 w-0.5 transition-all duration-500" />
-				<Link href={"/Auth/Signin"}>
-					<a className="hidden lg:flex font-medium hover:opacity-70 transition-opacity duration-300  justify-center items-center cursor-pointer ">
-						Signin
-					</a>
-				</Link>
-				<Link href={"/Auth/Signup"}>
-					<a className="hidden lg:flex text-white  justify-center items-center cursor-pointer bg-accent w-24 h-11 rounded-2xl font-medium border-2 border-accent hover:bg-transparent hover:text-accent transition-all duration-300">
-						Signup
-					</a>
-				</Link>
-
+				{session ? (
+					<button
+						onClick={() => signOut({ redirect: false })}
+						className="w-10 h-10 bg-accent rounded-full overflow-hidden"
+					>
+						{session?.user?.image && (
+							<img src={session?.user?.image} alt="user images" />
+						)}
+					</button>
+				) : (
+					<>
+						<Link href={"/Auth/Signin"}>
+							<a className="hidden lg:flex font-medium hover:opacity-70 transition-opacity duration-300  justify-center items-center cursor-pointer ">
+								Signin
+							</a>
+						</Link>
+						<Link href={"/Auth/Signup"}>
+							<a className="hidden lg:flex text-white  justify-center items-center cursor-pointer bg-accent w-24 h-11 rounded-2xl font-medium border-2 border-accent hover:bg-transparent hover:text-accent transition-all duration-300">
+								Signup
+							</a>
+						</Link>
+					</>
+				)}
 				{/* hamburger menu */}
 				<button
 					onClick={handleMenuClick}
