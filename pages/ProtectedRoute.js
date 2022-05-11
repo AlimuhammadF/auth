@@ -1,3 +1,7 @@
 export default function ProtectedRoute() {
-	return <div></div>;
+	return (
+		<div>
+			<main></main>
+		</div>
+	);
 }

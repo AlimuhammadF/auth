@@ -12,12 +12,12 @@ export default function Layout({ children }) {
 			<Head>
 				<title>Auth.</title>
 				<meta
-					name="Auth. - Portfolio wesbite"
+					name="description"
 					content="This is a full stack authentication website for portfolio purposes."
 				/>
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
-			<main className="bg-white dark:bg-darkBlue text-darkBlue dark:text-white font min-h-screen">
+			<main className="bg-white dark:bg-darkBlue text-darkBlue dark:text-white font min-h-screen overflow-x-hidden">
 				<Navbar />
 				{children}
 			</main>

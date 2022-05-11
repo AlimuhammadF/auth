@@ -1,3 +1,8 @@
+
 export default function ClientSideRender() {
-	return <div></div>;
+	return (
+		<div>
+			<main></main>
+		</div>
+	);
 }

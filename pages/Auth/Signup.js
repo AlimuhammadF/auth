@@ -1,31 +1,41 @@
-import Image from "next/image";
-import authLightImage from "../../public/images/authlight.svg";
-import authDarkImage from "../../public/images/authdark.svg";
 import { useContext } from "react";
 import UiContext from "../../context/UiContext";
 import Link from "next/link";
+import { motion } from "framer-motion";
 
 export default function Signup() {
 	const { darkmode } = useContext(UiContext);
 
 	return (
 		<div className="max-w-screen-xl mx-auto min-h-screen grid grid-cols-1">
-			<div className="col-span-1 flex flex-col items-center py-44 pl-8 pr-8 xl:pr-0 h-full">
-				<h4 className="text-lg font-semibold opacity-60">
-					START FOR FREE
-				</h4>
-				<h2 className="font-semibold text-4xl mt-8 text-center">
-					Create new account.
-				</h2>
-				<p className="mt-5 opacity-80">
-					Already a member?{" "}
-					<Link href={"/Auth/Signin"}>
-						<a className="opacity-100 text-accent font-semibold cursor-pointer">
-							Signin
-						</a>
-					</Link>
-				</p>
-				<form className="w-full max-w-lg flex-grow mt-8">
+			<main className="col-span-1 flex flex-col items-center py-44 mx-8 h-full">
+				<motion.article
+					initial={{ translateY: "-50px", opacity: 0 }}
+					animate={{ translateY: "0px", opacity: 1 }}
+					transition={{ duration: 0.3 }}
+					className="flex flex-col items-center"
+				>
+					<h4 className="text-lg font-semibold opacity-60">
+						START FOR FREE
+					</h4>
+					<h2 className="font-semibold text-3xl lg:text-4xl mt-8 text-center">
+						Create a account.
+					</h2>
+					<p className="mt-5 opacity-80">
+						Already have an account?{" "}
+						<Link href={"/Auth/Signin"}>
+							<a className="opacity-100 text-accent font-semibold cursor-pointer">
+								Signin
+							</a>
+						</Link>
+					</p>
+				</motion.article>
+				<motion.form
+					initial={{ translateY: "50px", opacity: 0 }}
+					animate={{ translateY: "0px", opacity: 1 }}
+					transition={{ duration: 0.3, delay: 0.3 }}
+					className="w-full max-w-lg flex-grow mt-8"
+				>
 					<div className="flex flex-col xl:flex-row justify-between">
 						<div className="bg-darkBlue xl:w-60  dark:bg-white bg-opacity-10 dark:bg-opacity-10 h-14 rounded-2xl px-8 flex items-center">
 							<input
@@ -128,14 +138,14 @@ export default function Signup() {
 							Google
 						</button>
 						<button
-							type="button "
+							type="button"
 							className="xl:w-60 mt-4 xl:mt-0 h-14 font-semibold bg-darkBlue dark:bg-white bg-opacity-10 dark:bg-opacity-10 rounded-2xl hover:bg-opacity-20 dark:hover:bg-opacity-20 transition-all duration-300"
 						>
 							Github
 						</button>
 					</div>
-				</form>
-			</div>
+				</motion.form>
+			</main>
 		</div>
 	);
 }

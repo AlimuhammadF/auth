@@ -1,3 +1,8 @@
+
 export default function ServerSideRender() {
-	return <div></div>;
+	return (
+		<div>
+			<main></main>
+		</div>
+	);
 }

@@ -68,9 +68,9 @@ export default function Navbar() {
 						onMouseEnter={() => setRenderDropDown(true)}
 						onMouseLeave={() => setRenderDropDown(false)}
 					>
-						<a className="font-medium opacity-60 group-hover:opacity-100 cursor-pointer transition-opacity duration-300">
+						<p className="font-medium opacity-60 group-hover:opacity-100 cursor-pointer transition-opacity duration-300">
 							Render Method
-						</a>
+						</p>
 						<AnimatePresence>
 							{renderDropDown && (
 								<motion.ul
