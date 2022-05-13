@@ -6,16 +6,15 @@ import { useContext, useEffect, useState } from "react";
 import UiContext from "../context/UiContext";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
-import { useSession, signOut } from "next-auth/react";
+import { useSession } from "next-auth/react";
+import Router from "next/router";
 
 export default function Navbar() {
 	//session
 	const { data: session } = useSession();
-	console.log(session);
 
 	//handle menu
 	const [menu, setMenu] = useState(false);
-	const [renderDropDown, setRenderDropDown] = useState(false);
 
 	const handleMenuClick = () => {
 		if (menu) {
@@ -68,45 +67,7 @@ export default function Navbar() {
 							</a>
 						</Link>
 					</li>
-					<li
-						className="relative  h-full flex items-center group"
-						onMouseEnter={() => setRenderDropDown(true)}
-						onMouseLeave={() => setRenderDropDown(false)}
-					>
-						<p className="font-medium opacity-60 group-hover:opacity-100 cursor-pointer transition-opacity duration-300">
-							Render Method
-						</p>
-						<AnimatePresence>
-							{renderDropDown && (
-								<motion.ul
-									initial={{ translateY: "20px", opacity: 0 }}
-									animate={{ translateY: "0px", opacity: 1 }}
-									exit={{ translateY: "20px", opacity: 0 }}
-									transition={{ duration: 0.15 }}
-									className="absolute z-30 -left-16 rounded-2xl bg-transparent shadow-md top-20 flex flex-col items-start w-64 bg-gray dark:bg-darkBlue-light "
-								>
-									<li className="h-full w-full flex justify-center items-center pt-2.5 px-2.5">
-										<Link
-											href={"/Renders/ServerSideRender"}
-										>
-											<a className="py-2.5 px-10 w-full rounded-2xl font-medium opacity-60 hover:opacity-100 bg-darkBlue bg-opacity-0 dark:bg-white dark:bg-opacity-0 hover:bg-opacity-10 hover:dark:bg-opacity-10 cursor-pointer transition-opacity duration-300">
-												Server Side Render
-											</a>
-										</Link>
-									</li>
-									<li className="h-full w-full flex justify-center items-center pb-2.5 px-2.5">
-										<Link
-											href={"/Renders/ClientSideRender"}
-										>
-											<a className="py-2.5 mt-2 w-full px-10 rounded-2xl font-medium opacity-60 hover:opacity-100 bg-darkBlue bg-opacity-0 dark:bg-opacity-0 dark:bg-white hover:bg-opacity-10 hover:dark:bg-opacity-10 cursor-pointer transition-opacity duration-300">
-												Client Side Render
-											</a>
-										</Link>
-									</li>
-								</motion.ul>
-							)}
-						</AnimatePresence>
-					</li>
+
 					<li>
 						<Link href={"/ProtectedRoute"}>
 							<a className="font-medium opacity-60 hover:opacity-100 cursor-pointer transition-opacity duration-300">
@@ -135,8 +96,8 @@ export default function Navbar() {
 				<hr className="hidden lg:block bg-darkBlue opacity-20 dark:bg-white h-8 w-0.5 transition-all duration-500" />
 				{session ? (
 					<button
-						onClick={() => signOut({ redirect: false })}
-						className="w-10 h-10 bg-accent rounded-full overflow-hidden"
+						onClick={() => Router.push("/User/Profile")}
+						className="w-10 h-10 hidden lg:block bg-accent rounded-full overflow-hidden"
 					>
 						{session?.user?.image && (
 							<img src={session?.user?.image} alt="user-image" />
@@ -188,26 +149,7 @@ export default function Navbar() {
 									</a>
 								</Link>
 							</li>
-							<li>
-								<Link href={"/Renders/ServerSideRender"}>
-									<a
-										onClick={handleMenuClick}
-										className="text-semibold text-xl active:opacity-100 transition-opacity duration-300"
-									>
-										Server Side Render
-									</a>
-								</Link>
-							</li>
-							<li>
-								<Link href={"/Renders/ClientSideRender"}>
-									<a
-										onClick={handleMenuClick}
-										className="text-semibold text-xl active:opacity-100 transition-opacity duration-300"
-									>
-										Client Side Render
-									</a>
-								</Link>
-							</li>
+
 							<li>
 								<Link href={"/ProtectedRoute"}>
 									<a
@@ -221,26 +163,43 @@ export default function Navbar() {
 
 							<hr className="w-36 opacity-20 border border-darkBlue dark:border-white transition-colors duration-500" />
 
-							<li>
-								<Link href={"/Auth/Signin"}>
-									<a
-										onClick={handleMenuClick}
-										className="text-semibold text-xl  active:opacity-100 transition-opacity duration-300"
-									>
-										Signin
-									</a>
-								</Link>
-							</li>
-							<li>
-								<Link href={"/Auth/Signup"}>
-									<a
-										onClick={handleMenuClick}
-										className="text-semibold text-white bg-accent text-lg px-10 py-3 rounded-2xl active:opacity-100 duration-300 border-2 border-accent hover:bg-transparent hover:text-accent"
-									>
-										Signup
-									</a>
-								</Link>
-							</li>
+							{session ? (
+								<>
+									<li>
+										<Link href={"/User/Profile"}>
+											<a
+												onClick={handleMenuClick}
+												className="text-semibold text-xl  active:opacity-100 transition-opacity duration-300"
+											>
+												Profile
+											</a>
+										</Link>
+									</li>
+								</>
+							) : (
+								<>
+									<li>
+										<Link href={"/Auth/Signin"}>
+											<a
+												onClick={handleMenuClick}
+												className="text-semibold text-xl  active:opacity-100 transition-opacity duration-300"
+											>
+												Signin
+											</a>
+										</Link>
+									</li>
+									<li>
+										<Link href={"/Auth/Signup"}>
+											<a
+												onClick={handleMenuClick}
+												className="text-semibold text-white bg-accent text-lg px-10 py-3 rounded-2xl active:opacity-100 duration-300 border-2 border-accent hover:bg-transparent hover:text-accent"
+											>
+												Signup
+											</a>
+										</Link>
+									</li>
+								</>
+							)}
 						</ul>
 					</motion.div>
 				)}

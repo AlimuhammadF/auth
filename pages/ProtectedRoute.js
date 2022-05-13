@@ -50,7 +50,7 @@ export default function ProtectedRoute() {
 			<article className="w-full py-40  px-8">
 				<h2 className="font-semibold text-3xl md:text-5xl text-center leading-tight">
 					{session
-						? "This is a protected page you re are a authenticated user thats why you can see this"
+						? "This is a protected page you are a authenticated user thats why you can see this"
 						: "This is a protected page only authenticated users can see this."}
 				</h2>
 				{session ? (
